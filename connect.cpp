@@ -20,11 +20,13 @@ int main(int argc, char* argv[]){
         {nullptr, 0, nullptr, 0}
     } // longOpts
     
+    int option, index;
+    int mode;
     
     while ((option = getopt_long(argc, argv, "m:h", longOpts, &index)) != -1){
         switch (option) {
             case 'm':
-                mode = optarg;
+                mode = atoi(tolower(optarg));
                 break;
             case 'h':
                 printHelpInfo();
@@ -36,6 +38,16 @@ int main(int argc, char* argv[]){
         } // switch
     } // while getopt_long
     
+    switch (mode) {
+        case 's':
+            // run simple mode with 2 human players on a 6x7 board.
+            break;
+            
+        default:
+            cout << "Invalid mode selected!";
+            printHelpInfo(); 
+            break;
+    }
     
     
     return 0;
