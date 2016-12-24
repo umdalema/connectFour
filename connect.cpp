@@ -26,7 +26,7 @@ int main(int argc, char* argv[]){
     while ((option = getopt_long(argc, argv, "m:h", longOpts, &index)) != -1){
         switch (option) {
             case 'm':
-                mode = atoi(tolower(optarg[0]));
+                mode = tolower(optarg[0]);
                 break;
             case 'h':
                 printHelpInfo();
@@ -59,10 +59,10 @@ void printHelpInfo(){
     cout << "Discalimer: I do not own any rights to this game!!\n";
     cout << "\n";
     cout << "USAGE:\n";
-    cout << "-h, --help: get helpful information about the game\n"
+    cout << "-h, --help: get helpful information about the game\n";
     cout << "-m, --mode <MODE>: MODE is optional. If unspecified will default to SIMPLE.\n";
     cout << "MODE option:\n";
-    cout << "   S: simple mode. two players will vs eachother on a standard 6x7 board.\n"
+    cout << "   S: simple mode. two players will vs eachother on a standard 6x7 board.\n";
     
     return;
 }
