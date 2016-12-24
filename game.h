@@ -17,12 +17,13 @@ struct Game {
          char playerB_pieceIN, std::string playerB_nameIN,
          int num_rows, int num_cols);
     
-    std::vector<std::vector<char> > board;
+    
     Player playerA;
     Player playerB;
+    std::vector<std::vector<char> > board;
     
     void playGame();
-    void checkBoardForSolution(); 
+    void checkBoardForSolution();
 };
 
 #endif

@@ -15,7 +15,7 @@ void printHelpInfo();
 int main(int argc, char* argv[]){
     
     static struct option longOpts[] = {
-        {"mode", argument_optional, nullptr, 'm'},
+        {"mode", optional_argument, nullptr, 'm'},
         {"help", no_argument, nullptr, 'h'},
         {nullptr, 0, nullptr, 0}
     } // longOpts
@@ -26,7 +26,7 @@ int main(int argc, char* argv[]){
     while ((option = getopt_long(argc, argv, "m:h", longOpts, &index)) != -1){
         switch (option) {
             case 'm':
-                mode = atoi(tolower(optarg));
+                mode = atoi(tolower(optarg[0]));
                 break;
             case 'h':
                 printHelpInfo();
