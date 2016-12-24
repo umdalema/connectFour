@@ -10,20 +10,26 @@
 #include <string>
 #include <vector>
 #include "player.h"
-struct Game {
-    
-    Game(); 
+Class Game {
+public:
+    Game();
     Game(char playerA_pieceIN, std::string playerA_nameIN,
          char playerB_pieceIN, std::string playerB_nameIN,
          int num_rows, int num_cols);
     
+    void playGame();
+   
+private:
     
     Player playerA;
     Player playerB;
     std::vector<std::vector<char> > board;
+    int playerA_score;
+    int playerB_score;
     
-    void playGame();
     void checkBoardForSolution();
+    void printBoard();
+    void printScore();
 };
 
 #endif
