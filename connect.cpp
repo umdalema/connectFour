@@ -18,7 +18,7 @@ int main(int argc, char* argv[]){
         {"mode", optional_argument, nullptr, 'm'},
         {"help", no_argument, nullptr, 'h'},
         {nullptr, 0, nullptr, 0}
-    } // longOpts
+    }; // longOpts
     
     int option, index;
     int mode;
