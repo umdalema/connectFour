@@ -29,8 +29,44 @@ void Game::printBoard(){
     
     cout << endl;
 }
-/*
+
 void printScore(){
     
-    cout << playerA.name;
-}*/
+    cout << playerA.name << ": " << playerA_score << " points\n"
+    cout << playerb.name << ": " << playerB_score << " points\n"
+}
+
+void Game::updateBoard(int col, Player* currentPlayer){
+    return; 
+}
+
+void Game::playGame(){
+    
+    printBoard();
+    
+    while ((playerA_score < 5) && (playerB_score < 5)) {
+        
+        while (true){
+            int col = playerA.playPiece();
+            
+            updateBoard(col, &playerA);
+            
+            if (checkBoardForSolution()){
+                cout << playerA.name << " has won this round!" << endl;
+                playerA_score++;
+            }
+            
+            printBoard();
+            col = playerB.playPiece();
+            
+            updateBoard(col, &playerB);
+            if (checkBoardForSolution()){
+                cout << playerB.name << " has won this round!" << endl;
+                playerB_score++;
+            }
+            
+        } // while(true)
+    } // while (score)
+    
+    return;
+} // playGame()

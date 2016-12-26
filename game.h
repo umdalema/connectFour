@@ -26,9 +26,10 @@ private:
     int playerA_score;
     int playerB_score;
     
-    void checkBoardForSolution();
+    bool checkBoardForSolution();
     void printBoard();
     void printScore();
+    void updateBoard(int col_num, Player* currentPlayer);
 };
 
 #endif
