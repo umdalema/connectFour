@@ -45,6 +45,7 @@ int main(int argc, char* argv[]){
     switch (mode) {
         case 's':
             // run simple mode with 2 human players on a 6x7 board.
+            game.playGame(); 
             break;
             
         default:

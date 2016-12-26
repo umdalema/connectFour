@@ -15,14 +15,14 @@ playerB_score(0) {}
 
 void Game::printBoard(){
     
-    for (int i = 0; i < board.size(); i++){
-        cout << "|" << board[i][0];
-        for (int j = 1; j < board[i].size(); j++){
-            cout << " " << board[i][j];
+    for (size_t row = (board.size() - 1); row >= 0; row--){
+        cout << "|" << board[row][0];
+        for (size_t col = board[i].size() - 1; col >= 0; col--){
+            cout << " " << board[row][col];
         }
         cout << "|\n";
     }
-    
+ 
     for (int i = 0; i < board[0].size(); i++){
         cout << " " << (i + 1);
     }
@@ -36,8 +36,29 @@ void printScore(){
     cout << playerb.name << ": " << playerB_score << " points\n"
 }
 
+bool Game::checkBoardForSolution(){
+    
+    // we could go with the queue method.
+    
+    
+    
+}
 void Game::updateBoard(int col, Player* currentPlayer){
-    return; 
+    
+    
+    // we can loop through the rows:
+    // when we find something in the column that we're playing in, we can
+    // simply move forward one row:
+    
+    for (size_t row = 0; row < board.size(); row++){
+        
+        if (board[row][col] == '-'){
+            board[row][col] = currentPlayer->piece;
+            return;
+        }
+    }
+    
+    return;
 }
 
 void Game::playGame(){
