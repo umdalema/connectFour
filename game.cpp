@@ -15,9 +15,9 @@ playerB_score(0) {}
 
 void Game::printBoard(){
     
-    for (size_t row = (board.size() - 1); row >= 0; row--){
+    for (int row = int(board.size() - 1); row >= 0; row--){
         cout << "|" << board[row][0];
-        for (size_t col = board[i].size() - 1; col >= 0; col--){
+        for (size_t col = 1; col < board[row].size(); col++){
             cout << " " << board[row][col];
         }
         cout << "|\n";
@@ -30,17 +30,17 @@ void Game::printBoard(){
     cout << endl;
 }
 
-void printScore(){
+void Game::printScore(){
     
-    cout << playerA.name << ": " << playerA_score << " points\n"
-    cout << playerb.name << ": " << playerB_score << " points\n"
+    cout << playerA.name << ": " << playerA_score << " points\n";
+    cout << playerB.name << ": " << playerB_score << " points\n";
 }
 
 bool Game::checkBoardForSolution(){
     
     // we could go with the queue method.
     
-    
+    return false;
     
 }
 void Game::updateBoard(int col, Player* currentPlayer){
@@ -85,6 +85,7 @@ void Game::playGame(){
                 cout << playerB.name << " has won this round!" << endl;
                 playerB_score++;
             }
+            printBoard();
             
         } // while(true)
     } // while (score)

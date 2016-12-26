@@ -17,7 +17,6 @@ class Player {
     
         // need to finsih this funciton:
         int playPiece();
-    private:
         std::string name;
         char piece;
 };

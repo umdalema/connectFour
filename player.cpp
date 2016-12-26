@@ -13,4 +13,13 @@ Player::Player():
 Player::Player(string name_in, char piece_in):
     name(name_in), piece(piece_in){}
 
-
+int Player::playPiece(){
+    
+    int col;
+    
+    cout << name << " it's your turn.\n";
+    cout << "Please select which coloumn you'd like to play in: ";
+    cin >> col;
+    cout << "\n";
+    return (col - 1);
+}
