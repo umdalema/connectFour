@@ -10,7 +10,7 @@
 #include <string>
 #include <vector>
 #include "player.h"
-Class Game {
+class Game {
 public:
     Game();
     Game(char playerA_pieceIN, std::string playerA_nameIN,
@@ -18,7 +18,6 @@ public:
          int num_rows, int num_cols);
     
     void playGame();
-   
 private:
     
     Player playerA;

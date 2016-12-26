@@ -6,8 +6,10 @@
 
 #include <iostream>
 #include <vector>
-#include <string> 
+#include <string>
 #include <getopt.h>
+
+#include "game.h"
 using namespace std;
 
 void printHelpInfo();
@@ -37,6 +39,8 @@ int main(int argc, char* argv[]){
                 exit(1);
         } // switch
     } // while getopt_long
+    
+    Game game;
     
     switch (mode) {
         case 's':

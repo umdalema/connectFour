@@ -8,6 +8,29 @@ playerA("JohnDoeA", 'x'), playerB("JohnDoneB", 'o'), board(vector<vector<char> >
 Game::Game(char playerA_pieceIN, string playerA_nameIN, 
            char playerB_pieceIN, string playerB_nameIN,
            int num_rows, int num_cols):
-playerA(playerA_nameIN, playerA_pieceIN), playerB(playerB_nameIN, playerB_pieceIN),
-board(vector<vector<char> > (num_rows, vector<char>(num_cols, '-'))), playerA_score(0), playerB_score(0) {}
+playerA(playerA_nameIN, playerA_pieceIN),playerB(playerB_nameIN, playerB_pieceIN),
+board(vector<vector<char> > (num_rows, vector<char>(num_cols, '-'))), playerA_score(0),
+playerB_score(0) {}
 
+
+void Game::printBoard(){
+    
+    for (int i = 0; i < board.size(); i++){
+        cout << "|" << board[i][0];
+        for (int j = 1; j < board[i].size(); j++){
+            cout << " " << board[i][j];
+        }
+        cout << "|\n";
+    }
+    
+    for (int i = 0; i < board[0].size(); i++){
+        cout << " " << (i + 1);
+    }
+    
+    cout << endl;
+}
+/*
+void printScore(){
+    
+    cout << playerA.name;
+}*/
