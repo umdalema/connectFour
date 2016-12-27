@@ -2,7 +2,7 @@
 This is a text based version of the popular game Connect Four. 
 <pre>
 Compiled on a linuex system using the command: 
-  "g++ -std=c++14 -Wall -Werror -Wvla -Wextra -pedantic -O3 connect.cpp game.h game.cpp player.h player.cpp -o connect"
+"g++ -std=c++14 -Wall -Werror -Wvla -Wextra -pedantic -O3 connect.cpp game.h game.cpp player.h player.cpp -o connect"
   
 Flags: 
  -m, --mode |MODE| : This flag is optional. If not selected the program will default to simple. 
