@@ -101,7 +101,7 @@ void simple(){
     Game game('x', playerA_name, 'o', playerB_name, 6, 7, score);
     
     game.playGame();
-    cout << "\nThanks for playing!";
+    cout << "Thanks for playing!";
     return;
 }
 
@@ -155,6 +155,7 @@ void custom() {
     Game game(playerA_piece, playerA_name, playerB_piece, playerB_name, numRows, numCols, score);
     
     game.playGame();
+    cout << "Thanks for playing!";
     return;
 }
 
