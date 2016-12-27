@@ -23,7 +23,7 @@ void Game::printBoard(){
         cout << "|\n";
     }
  
-    for (int i = 0; i < board[0].size(); i++){
+    for (size_t i = 0; i < board[0].size(); i++){
         cout << " " << (i + 1);
     }
     
@@ -154,11 +154,11 @@ void Game::playGame(){
         while (true){
             try {
                 col = playerA.playPiece();
-                if ((col < 1) || col > board[0].size())
+                if ((col < 1) || col > int(board[0].size()))
                     throw 'a';
             } catch (char) {
                 
-                while ((col < 1) || col > board[0].size()) {
+                while ((col < 1) || col > int(board[0].size())) {
                     cin.clear();
                     getline(cin, trash);
                     cout << playerA.name << " the move you selected is invalid.\n";
@@ -181,7 +181,7 @@ void Game::playGame(){
             printBoard();
             col = playerB.playPiece();
             
-            while ((col < 1) || col > board[0].size()) {
+            while ((col < 1) || col > int(board[0].size())) {
                 cin.clear();
                 getline(cin, trash);
                 cout << playerB.name << " the move you selected is invalid.\n";
