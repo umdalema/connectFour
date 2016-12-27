@@ -13,6 +13,7 @@
 using namespace std;
 
 void printHelpInfo();
+void simple();
 
 int main(int argc, char* argv[]){
     
@@ -40,12 +41,12 @@ int main(int argc, char* argv[]){
         } // switch
     } // while getopt_long
     
-    Game game;
+   
     
     switch (mode) {
         case 's':
             // run simple mode with 2 human players on a 6x7 board.
-            game.playGame(); 
+            simple();
             break;
             
         default:
@@ -72,6 +73,31 @@ void printHelpInfo(){
     return;
 }
 
+void simple(){
+    string playerA_name;
+    string playerB_name;
+    int score;
+    
+    cout << "Simple is a two player mode with two human players.\n\n";
+    cout << "Player 1, please enter the name you'd like to use:";
+    getline(cin, playerA_name);
+    cout << playerA_name << " you will be playing with x.\n\n";
+    cout << "Player 2, please enter the name you'd like to use:";
+    getline(cin, playerB_name);
+    cout << playerB_name << " you will be playing with o.\n\n";
+    
+    cout << "Discuss amongst yourselves to what score you'd like to play to.\n";
+    cout << "What score would you like to play to? ";
+    cin >> score;
+    
+    cout << "\nThank you for you patience and good luck to both of you! Enjoy!\n\n";
+    
+    Game game('x', playerA_name, 'o', playerB_name, 6, 7, score);
+    
+    game.playGame();
+    cout << "\nThanks for playing!";
+    return;
+}
 
 
 

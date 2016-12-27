@@ -21,5 +21,5 @@ int Player::playPiece(){
     cout << "Please select which coloumn you'd like to play in: ";
     cin >> col;
     cout << "\n";
-    return (col - 1);
+    return col;
 }

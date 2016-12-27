@@ -15,7 +15,7 @@ public:
     Game();
     Game(char playerA_pieceIN, std::string playerA_nameIN,
          char playerB_pieceIN, std::string playerB_nameIN,
-         int num_rows, int num_cols);
+         int num_rows, int num_cols, int score_in);
     
     void playGame();
 private:
@@ -25,11 +25,17 @@ private:
     std::vector<std::vector<char> > board;
     int playerA_score;
     int playerB_score;
+    int score; 
     
-    bool checkBoardForSolution();
+    bool checkBoardForSolution(char piece);
     void printBoard();
     void printScore();
+    void resetBoard(); 
     void updateBoard(int col_num, Player* currentPlayer);
+    bool checkDiag(char piece);
+    bool checkSide(char piece);
+    bool checkUp(char piece);
+    bool checkBackDiag(char piece);
 };
 
 #endif
