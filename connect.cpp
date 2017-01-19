@@ -1,4 +1,4 @@
-Simple/*
+/*
     Dale Mallette
     December 12th, 2016
     Personal project: just a simple little texted based c++ game.
