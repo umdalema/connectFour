@@ -1,4 +1,4 @@
-/*
+Simple/*
     Dale Mallette
     December 12th, 2016
     Personal project: just a simple little texted based c++ game.
@@ -98,7 +98,7 @@ void simple(){
     
     cout << "\nThank you for you patience and good luck to both of you! Enjoy!\n\n";
     
-    Game game('x', playerA_name, 'o', playerB_name, 6, 7, score);
+    Game game('x', playerA_name, "human", 'o', playerB_name, "human", 6, 7, score);
     
     game.playGame();
     cout << "Thanks for playing!";
@@ -152,7 +152,7 @@ void custom() {
     
     cout << "\nThank you for you patience and good luck to both of you! Enjoy!\n\n";
     
-    Game game(playerA_piece, playerA_name, playerB_piece, playerB_name, numRows, numCols, score);
+    Game game(playerA_piece, playerA_name, "human", playerB_piece, playerB_name, "human", numRows, numCols, score);
     
     game.playGame();
     cout << "Thanks for playing!";
