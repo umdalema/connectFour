@@ -9,8 +9,8 @@
 
 #include <iostream>
 #include <string> 
-#define NUMNAMES = 34
-#define NUMCHARS = 
+#define NUMNAMES 34
+#define NUMCHARS 16
 
 static const std::string names_for_Computer[NUMNAMES] {
     "Dale", "Micheal", "Brad", "Ankit",
@@ -30,7 +30,6 @@ static const char characters_for_computer[NUMCHARS] {
     'f', 'u', 'c', 'k', '&',
     '*'
 }
-
 
 class Player {
     public:
@@ -93,15 +92,15 @@ private:
         return names_for_Computer[index];
     }
 };
+/*
+ *  REQUIRED: playerType_in must be all lowercase.
+ */
 
 Player* player_facotry(std::string playerType_in, std::string name_in, char piece_in){
     
-    std::string playerType_in_lower = " ";
-    transform(playerType_in.begin(), playerType_in.end(), playerType_in_lower.begin(), tolower());
-    
     if (playerType_in == "human"){
         return new Human(name_in, piece_in);
-    } else if (playerType_in_lower = "simple"){
+    } else if (playerType_in_lower == "simple"){
         return new Simple();
     }
     
