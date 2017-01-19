@@ -13,15 +13,15 @@
 class Game {
 public:
     Game();
-    Game(char playerA_pieceIN, std::string playerA_nameIN,
-         char playerB_pieceIN, std::string playerB_nameIN,
+    Game(char playerA_pieceIN, std::string playerA_nameIN, std::string playerA_typeIn,
+         char playerB_pieceIN, std::string playerB_nameIN, std::string playerB_typeIn,
          int num_rows, int num_cols, int score_in);
     
     void playGame();
 private:
     
-    Player playerA;
-    Player playerB;
+    Player* playerA;
+    Player* playerB;
     std::vector<std::vector<char> > board;
     int playerA_score;
     int playerB_score;

@@ -3,12 +3,13 @@
 using namespace std;
 
 Game::Game():
-playerA("JohnDoeA", 'x'), playerB("JohnDoneB", 'o'), board(vector<vector<char> > (6, vector<char>(7, '-'))), playerA_score(0), playerB_score(0), score(5) {}
+playerA(player_factory("human", "JohnDoeA", 'x')), playerB(player_factory("human", "JohnDoeB", 'o')), board(vector<vector<char> > (6, vector<char>(7, '-'))), playerA_score(0), playerB_score(0), score(5) {}
 
-Game::Game(char playerA_pieceIN, string playerA_nameIN, 
-           char playerB_pieceIN, string playerB_nameIN,
+Game::Game(char playerA_pieceIN, string playerA_nameIN, string playerA_typeIn,
+           char playerB_pieceIN, string playerB_nameIN, string playerB_typeIn,
            int num_rows, int num_cols, int score_in):
-playerA(playerA_nameIN, playerA_pieceIN),playerB(playerB_nameIN, playerB_pieceIN),
+playerA(player_factory(playerA_typeIn, playerA_nameIN, playerA_pieceIN)),
+playerB(player_factory(playerB_typeIn, playerB_nameIN, playerB_pieceIN)),
 board(vector<vector<char> > (num_rows, vector<char>(num_cols, '-'))), playerA_score(0),
 playerB_score(0), score(score_in) {}
 
@@ -153,7 +154,7 @@ void Game::playGame(){
         string trash;
         while (true){
             try {
-                col = playerA.playPiece();
+                col = playerA->playPiece();
                 if ((col < 1) || col > int(board[0].size()))
                     throw 'a';
             } catch (char) {
@@ -161,7 +162,7 @@ void Game::playGame(){
                 while ((col < 1) || col > int(board[0].size())) {
                     cin.clear();
                     getline(cin, trash);
-                    cout << playerA.name << " the move you selected is invalid.\n";
+                    cout << playerA->name << " the move you selected is invalid.\n";
                     cout << "Please select a valid column number: ";
                     cin >> col;
                     cout << "\n";
@@ -169,31 +170,31 @@ void Game::playGame(){
             }
             
             
-            updateBoard(col, &playerA);
+            updateBoard(col, playerA);
             
-            if (checkBoardForSolution(playerA.piece)){
-                cout << playerA.name << " has won this round!" << endl;
+            if (checkBoardForSolution(playerA->piece)){
+                cout << playerA->name << " has won this round!" << endl;
                 playerA_score++;
                 printBoard();
                 break; 
             }
             
             printBoard();
-            col = playerB.playPiece();
+            col = playerB->playPiece();
             
             while ((col < 1) || col > int(board[0].size())) {
                 cin.clear();
                 getline(cin, trash);
-                cout << playerB.name << " the move you selected is invalid.\n";
+                cout << playerB->name << " the move you selected is invalid.\n";
                 cout << "Please select a valid column number: ";
                 cin >> col;
                 cout << "\n";
             }
 
             
-            updateBoard(col, &playerB);
-            if (checkBoardForSolution(playerB.piece)){
-                cout << playerB.name << " has won this round!" << endl;
+            updateBoard(col, playerB);
+            if (checkBoardForSolution(playerB->piece)){
+                cout << playerB->name << " has won this round!" << endl;
                 playerB_score++;
                 printBoard();
                 break;
