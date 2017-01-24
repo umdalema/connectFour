@@ -152,6 +152,12 @@ void Game::playGame(){
         int col = -1;
         string trash;
         while (true){
+            
+            if (boardIsFull()) {
+                cout << "The Board is full! Good luck in the next game!\n";
+                break; 
+            }
+            
             try {
                 col = playerA->playPiece();
                 if ((col < 1) || col > int(board[0].size()))
@@ -216,8 +222,19 @@ int Game::checkFullColumn(int colSelected, Player* currentPlayer){
             while (board[board.size() -1][colSelected - 1] != '-'){
                 colSelected = currentPlayer->playFullColumn(colSelected);
             }
-            
-        }
     
+        }
     return colSelected;
+}
+
+bool Game::boardIsFull(){
+    
+    for (size_t col = 0; col < board[0].size(); col++){
+        if(board[board.size() - 1][col] == '-'){
+            return false;
+        }
+    }
+    
+    
+    return true;
 }

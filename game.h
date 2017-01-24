@@ -37,6 +37,7 @@ private:
     bool checkUp(char piece);
     bool checkBackDiag(char piece);
     int checkFullColumn(int colSelected, Player* currentPlayer);
+    bool boardIsFull();
 };
 
 #endif
