@@ -5,6 +5,7 @@
  */
 
 #include "player.h"
+using namespace std;
 
 Player* player_factory(std::string playerType_in, std::string name_in, char piece_in){
     
@@ -51,6 +52,15 @@ int Human::playPiece() {
     return col;
 }
 
+int Human::playFullColumn(int colSelected){
+    
+    cout << "\nColumn " << colSelected << " is full. Please sleect a different column: ";
+    cin >> colSelected;
+    
+    return colSelected; 
+}
+
+
 /******************************************************************************
  IMPLEMENTATION OF SIMPLE CLASS
  ******************************************************************************/
@@ -65,6 +75,11 @@ int Simple::playPiece(){
     // in the easyversion it will just chose a player at random.
     // return number out of 1000.
     return ((rand() % 1000) % 6) + 1;
+}
+
+int Simple::playFullColumn(int colSelected){
+    // try to select another random column. 
+    return  playPiece();
 }
 
 char Simple::getRandomPiece(){

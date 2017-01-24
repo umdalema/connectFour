@@ -82,8 +82,10 @@ void printHelpInfo(){
     cout << "-h, --help: get helpful information about the game\n";
     cout << "-m, --mode <MODE>: MODE is optional. If unspecified will default to SIMPLE.\n";
     cout << "MODE option:\n";
-    cout << "   s: simple mode. two players will vs eachother on a standard 6x7 board.\n";
+    cout << "   o: original mode. two players will vs eachother on a standard 6x7 board.\n";
     cout << "   c: custom mode. two players will play eachother on a board the size of which they choose.\n";
+    cout << "   s: simple mode. One player will play against a \"computer\" opponent on a\n";
+    cout << "                   standard 6x7 board.\n";
     cout << "      Players will also get to chose what piece they use throught the game.\n";
     
     return;
@@ -95,10 +97,10 @@ void original(){
     int score;
     
     cout << "Original is a two player mode with two human players.\n\n";
-    cout << "Player 1, please enter the name you'd like to use:";
+    cout << "Player 1, please enter the name you'd like to use: ";
     getline(cin, playerA_name);
     cout << playerA_name << " you will be playing with x.\n\n";
-    cout << "Player 2, please enter the name you'd like to use:";
+    cout << "Player 2, please enter the name you'd like to use: ";
     getline(cin, playerB_name);
     cout << playerB_name << " you will be playing with o.\n\n";
     
@@ -126,12 +128,12 @@ void custom() {
     int score;
     
     cout << "Custom mode is a two player mode with two human players.\n\n";
-    cout << "Player 1, please enter the name you'd like to use:";
+    cout << "Player 1, please enter the name you'd like to use: ";
     getline(cin, playerA_name);
     cout << playerA_name << " please select the piece you would like to use.\n";
     cout << "Please select only one character: ";
     cin >> playerA_piece;
-    cout << "\nPlayer2, please enter the name you'd like to use:";
+    cout << "\nPlayer2, please enter the name you'd like to use: ";
     cin.ignore();
     //getline(cin, playerB_name);
     getline(cin, playerB_name);
@@ -188,7 +190,7 @@ void simple(){
     cout << "Please select only one character: ";
     cin >> playerA_piece;
     
-    cout << "What Score would you like to play to? ";
+    cout << "\nWhat Score would you like to play to? ";
     cin >> score;
     
     cout << "\nThank you for you patience and good luck to both of you! Enjoy!\n\n";

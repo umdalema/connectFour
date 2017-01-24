@@ -1,4 +1,3 @@
-
 #include "game.h"
 using namespace std;
 
@@ -170,7 +169,7 @@ void Game::playGame(){
             }
             
             
-            updateBoard(col, playerA);
+            updateBoard(checkFullColumn(col, playerA), playerA);
             
             if (checkBoardForSolution(playerA->getPiece())){
                 cout << playerA->getName()<< " has won this round!" << endl;
@@ -192,7 +191,7 @@ void Game::playGame(){
             }
 
             
-            updateBoard(col, playerB);
+            updateBoard(checkFullColumn(col, playerB), playerB);
             if (checkBoardForSolution(playerB->getPiece())){
                 cout << playerB->getName() << " has won this round!" << endl;
                 playerB_score++;
@@ -207,3 +206,18 @@ void Game::playGame(){
     } // while (score)
     return;
 } // playGame()
+
+int Game::checkFullColumn(int colSelected, Player* currentPlayer){
+    
+
+        if (board[board.size() -1][colSelected - 1] != '-'){
+            // the last piece in this column isn't the void piece so the column is full
+            
+            while (board[board.size() -1][colSelected - 1] != '-'){
+                colSelected = currentPlayer->playFullColumn(colSelected);
+            }
+            
+        }
+    
+    return colSelected;
+}

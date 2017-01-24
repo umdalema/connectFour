@@ -48,6 +48,7 @@ class Player {
    
         // need to finsih this funciton:
         virtual int playPiece() = 0;
+        virtual int playFullColumn(int colSelected) = 0;
 };
 
 class Human : public Player {
@@ -57,7 +58,10 @@ class Human : public Player {
         Human(std::string name_in, char piece_in);
         
         virtual int playPiece();
+        virtual int playFullColumn(int colSelected);
 };
+
+
 
 class Simple : public Player {
 public:
@@ -66,8 +70,10 @@ public:
     Simple(std::string name_in, char piece_in);
     
     virtual int playPiece();
+    virtual int playFullColumn(int colSelected);
     
 private:
+    
     char getRandomPiece();
     
     std::string getRandomName();

@@ -36,6 +36,7 @@ private:
     bool checkSide(char piece);
     bool checkUp(char piece);
     bool checkBackDiag(char piece);
+    int checkFullColumn(int colSelected, Player* currentPlayer);
 };
 
 #endif
