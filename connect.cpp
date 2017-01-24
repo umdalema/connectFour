@@ -9,12 +9,18 @@
 #include <string>
 #include <getopt.h>
 
+#define computerNameHolder "void"
+#define computerPieceHolder '-'
+#define standardRows 6
+#define standardCols 7
+
 #include "game.h"
 using namespace std;
 
 void printHelpInfo();
-void simple();
+void original();
 void custom();
+void simple();
 
 int main(int argc, char* argv[]){
     
@@ -45,13 +51,17 @@ int main(int argc, char* argv[]){
    
     
     switch (mode) {
-        case 's':
+        case 'o':
             // run simple mode with 2 human players on a 6x7 board.
-            simple();
+            original();
             break;
         case 'c':
             custom();
             // run custom mode with 2 human players on a custom board.
+            break;
+        case 's':
+            // run simple mode with 1 human and 1 computer player. 
+            simple();
             break;
         default:
             cout << "Invalid mode selected!";
@@ -79,12 +89,12 @@ void printHelpInfo(){
     return;
 }
 
-void simple(){
+void original(){
     string playerA_name;
     string playerB_name;
     int score;
     
-    cout << "Simple is a two player mode with two human players.\n\n";
+    cout << "Original is a two player mode with two human players.\n\n";
     cout << "Player 1, please enter the name you'd like to use:";
     getline(cin, playerA_name);
     cout << playerA_name << " you will be playing with x.\n\n";
@@ -159,6 +169,34 @@ void custom() {
     return;
 }
 
+void simple(){
+    
+    
+    string playerA_name;
+    string playerB_name;
+    char   playerA_piece;
+    int score;
+    
+    
+    cout << "Simple mode is a one player mode in which Player 2 will be a \"computer\" player.\n";
+    cout << "Simple mode is played on a standard 6x7 board.\n";
+    cout << "Player 1, please enter the name you'd like to use:";
+    getline(cin, playerA_name);
+    
+    
+    cout << playerA_name << " please select the piece you would like to use.\n";
+    cout << "Please select only one character: ";
+    cin >> playerA_piece;
+    
+    cin >> score;
+    
+    cout << "\nThank you for you patience and good luck to both of you! Enjoy!\n\n";
+    
+    Game game(playerA_piece, playerA_name, "human", computerPieceHolder, computerNameHolder, "simple", standardRows, standardCols, score);
+    game.playGame();
+    cout << "Thanks for playing!";
+    return;
+}
 
 
 
