@@ -14,6 +14,6 @@ Flags:
                   You can select names and the score to play to. 
     -c, custom: Custom mode. Two players will play against eachoterh on a board the size of their choosing. 
                 Players are able to select names and what character their piece will be.
-    -s, simple: simple mode. One player will play against a simple computer opponent. The computer 
+    -s, simple: Simple mode. One player will play against a simple computer opponent. The computer 
                 opponent will randomly chose a column to play in on a standartd 6x7 board. 
 </pre>

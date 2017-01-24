@@ -31,7 +31,7 @@ int main(int argc, char* argv[]){
     }; // longOpts
     
     int option, index;
-    int mode = 's';
+    int mode = 'o';
     
     while ((option = getopt_long(argc, argv, "m:h", longOpts, &index)) != -1){
         switch (option) {
