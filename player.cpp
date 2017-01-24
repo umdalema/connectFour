@@ -78,8 +78,9 @@ int Simple::playPiece(){
 }
 
 int Simple::playFullColumn(int colSelected){
-    // try to select another random column. 
-    return  playPiece();
+    // try to select another random column.
+    colSelected = playPiece();  
+    return  colSelected; 
 }
 
 char Simple::getRandomPiece(){
