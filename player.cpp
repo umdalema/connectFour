@@ -64,7 +64,7 @@ Player(name_in, piece_in){}
 int Simple::playPiece(){
     // in the easyversion it will just chose a player at random.
     // return number out of 1000.
-    return (rand() % 1000) % 7;
+    return ((rand() % 1000) % 6) + 1;
 }
 
 char Simple::getRandomPiece(){

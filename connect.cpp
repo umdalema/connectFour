@@ -179,15 +179,16 @@ void simple(){
     
     
     cout << "Simple mode is a one player mode in which Player 2 will be a \"computer\" player.\n";
-    cout << "Simple mode is played on a standard 6x7 board.\n";
-    cout << "Player 1, please enter the name you'd like to use:";
+    cout << "Simple mode is played on a standard 6x7 board.\n\n";
+    cout << "Player 1, please enter the name you'd like to use: ";
     getline(cin, playerA_name);
     
     
-    cout << playerA_name << " please select the piece you would like to use.\n";
+    cout << "\n" << playerA_name << " please select the piece you would like to use.\n";
     cout << "Please select only one character: ";
     cin >> playerA_piece;
     
+    cout << "What Score would you like to play to? ";
     cin >> score;
     
     cout << "\nThank you for you patience and good luck to both of you! Enjoy!\n\n";
