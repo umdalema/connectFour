@@ -27,14 +27,14 @@ private:
     int playerB_score;
     int score; 
     
-    bool checkBoardForSolution(char piece);
+    bool checkBoardForSolution(char piece, int played_in);
     void printBoard();
     void printScore();
     void resetBoard(); 
     void updateBoard(int col_num, Player* currentPlayer);
     bool checkDiag(char piece);
     bool checkSide(char piece);
-    bool checkUp(char piece);
+    bool checkUp(char piece, int played_in);
     bool checkBackDiag(char piece);
     int checkFullColumn(int colSelected, Player* currentPlayer);
     bool boardIsFull();

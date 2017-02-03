@@ -79,22 +79,26 @@ bool Game::checkSide(char piece){
     return false;
 }
 
-bool Game::checkUp(char piece){
+bool Game::checkUp(char piece, int played_in){
+  
+    // the idea is that given the column, you can just check specific places.
+    // since we know that it has to be four in a row we can check the current spot and three spots ahead of us.
+    // if the two are the same, we can check the next two if those are also the same then it's a solution, if not
     
-    for (size_t col = 0; col < board[0].size(); col++){
-        for(size_t row = 0; row < (board.size() - 3); row++){
-            if ((board[row][col] == piece) &&
-                (board[row + 1][col] == piece) &&
-                (board[row + 2][col] == piece) &&
-                (board[row + 3][col] == piece)){
-                
+    for (size_t row = 0; row < board.size() - 3; row ++){
+        
+        if ((board[row][played_in] == piece) && (board[row + 3][played_in] == piece)){
+            
+            // we can check the inner two {
+            if ((board[row + 1][played_in] == piece) && (board[row + 2][played_in] == piece)){
                 return true;
             }
-        } // for innter
-    } // for outter
+        }
+        
+    }
     return false;
 }
-bool Game::checkBoardForSolution(char piece){
+bool Game::checkBoardForSolution(char piece, int played_in){
     
     /*     
            4 0 1 2 3 4
@@ -103,9 +107,10 @@ bool Game::checkBoardForSolution(char piece){
            1 0 1 2 3 4
            0 0 1 2 3 4
      */
+    played_in -= 1;
     
     // start with the first square and check every square;
-    if (checkUp(piece) ||
+    if (checkUp(piece, played_in ) ||
         checkSide(piece) ||
         checkDiag(piece) ||
         checkBackDiag(piece)) {
@@ -177,7 +182,7 @@ void Game::playGame(){
             
             updateBoard(checkFullColumn(col, playerA), playerA);
             
-            if (checkBoardForSolution(playerA->getPiece())){
+            if (checkBoardForSolution(playerA->getPiece(), col)){
                 cout << playerA->getName()<< " has won this round!" << endl;
                 playerA_score++;
                 printBoard();
@@ -198,7 +203,7 @@ void Game::playGame(){
 
             
             updateBoard(checkFullColumn(col, playerB), playerB);
-            if (checkBoardForSolution(playerB->getPiece())){
+            if (checkBoardForSolution(playerB->getPiece(), col)){
                 cout << playerB->getName() << " has won this round!" << endl;
                 playerB_score++;
                 printBoard();
