@@ -2,7 +2,7 @@
 using namespace std;
 
 Game::Game():
-playerA(player_factory("human", "JohnDoeA", 'x')), playerB(player_factory("human", "JohnDoeB", 'o')), board(vector<vector<char> > (6, vector<char>(7, '-'))), playerA_score(0), playerB_score(0), score(5) {}
+playerA(player_factory("human", "JohnDoeA", 'x')), playerB(player_factory("human", "JohnDoeB", 'o')), board(vector<vector<char> > (7, vector<char>(6, '-'))), playerA_score(0), playerB_score(0), score(5) {}
 
 Game::Game(char playerA_pieceIN, string playerA_nameIN, string playerA_typeIn,
            char playerB_pieceIN, string playerB_nameIN, string playerB_typeIn,
@@ -15,15 +15,21 @@ playerB_score(0), score(score_in) {}
 
 void Game::printBoard(){
     
-    for (int row = int(board.size() - 1); row >= 0; row--){
-        cout << "|" << board[row][0];
-        for (size_t col = 1; col < board[row].size(); col++){
+    // we want to move across and then down.
+    
+    
+
+    for (int col = int(board[0].size()) - 1; col >= 0; col --){
+        
+        cout << "|" << board[0][col];
+        
+        for (size_t row = 1; row < board.size(); row++){
             cout << " " << board[row][col];
         }
         cout << "|\n";
     }
- 
-    for (size_t i = 0; i < board[0].size(); i++){
+    
+    for (size_t i = 0; i < board.size(); i++){
         cout << " " << (i + 1);
     }
     
@@ -49,7 +55,15 @@ bool Game::checkBackDiag(char piece){
     }
     return false; 
 }
-bool Game::checkDiag(char piece){
+bool Game::checkDiag(char piece, int played_in){
+    
+    // For now find the row that we're checking in the hard way:
+    
+    for (size_t row = 0; row < board.size(); row++){
+        
+        
+    }
+    
     for (size_t row = 0; row < (board.size() - 3); row++){
         for (size_t col = 0; col < (board[row].size() - 3); col++){
             if ((board[row][col] == piece) &&
@@ -63,40 +77,51 @@ bool Game::checkDiag(char piece){
     return false;
 }
 
-bool Game::checkSide(char piece){
-    for (size_t row = 0; row < board.size(); row++) {
-        for (size_t col = 0; col < (board[row].size() - 3); col++) {
-            if ((board[row][col] == piece) &&
-                (board[row][col + 1] == piece) &&
-                (board[row][col + 2] == piece) &&
-                (board[row][col + 3] == piece)){
-                
-                return true;
-            } // if
-        } // inner for
-    } // outter for
+bool Game::checkSide(char piece, int played_in){
+  
+    // we have the column that we played in, so we first need to get the row.
+    vector<char>::iterator it = find(board[played_in].begin(), board[played_in].end(), '-');
+    
+    // get the correct row. Need to subtract one because of zero index.
+    int row =  int(distance(board[played_in].begin(), it)) - 1;
+    
+    // start and end columns to look at.
+    int colStart = ((played_in - 4) > 0) ? (played_in - 4) : 0;
+    int colEnd = ((played_in + 4) < int(board.size()) - 1) ? (played_in + 4) : int(board.size() - 1);
+    
+    int counter = 0;
+    
+    for (int col = colStart; col <= colEnd; col++){
+        
+        counter++;
+        
+        if (board[col][row] != piece){
+            counter = 0;
+        }
+        if (counter == 4){
+            return true;
+        }
+    }
     
     return false;
 }
 
 bool Game::checkUp(char piece, int played_in){
   
-    // the idea is that given the column, you can just check specific places.
-    // since we know that it has to be four in a row we can check the current spot and three spots ahead of us.
-    // if the two are the same, we can check the next two if those are also the same then it's a solution, if not
+    vector<char>::iterator it = find(board[played_in].begin(), board[played_in].end(), '-');
     
-    for (size_t row = 0; row < board.size() - 3; row ++){
+    for (int i = 0; i < 4; i++){
         
-        if ((board[row][played_in] == piece) && (board[row + 3][played_in] == piece)){
-            
-            // we can check the inner two {
-            if ((board[row + 1][played_in] == piece) && (board[row + 2][played_in] == piece)){
-                return true;
-            }
+        it--;
+        
+        if (*it != piece){
+            return false;
         }
         
     }
-    return false;
+    
+    
+    return true;
 }
 bool Game::checkBoardForSolution(char piece, int played_in){
     
@@ -111,8 +136,8 @@ bool Game::checkBoardForSolution(char piece, int played_in){
     
     // start with the first square and check every square;
     if (checkUp(piece, played_in ) ||
-        checkSide(piece) ||
-        checkDiag(piece) ||
+        checkSide(piece, played_in) ||
+        checkDiag(piece, played_in) ||
         checkBackDiag(piece)) {
         return true;
     }
@@ -126,7 +151,8 @@ void Game::updateBoard(int col, Player* currentPlayer){
     // we can loop through the rows:
     // when we find something in the column that we're playing in, we can
     // simply move forward one row:
-    col--;
+    
+    /*col--;
     
     for (size_t row = 0; row < board.size(); row++){
         
@@ -134,7 +160,12 @@ void Game::updateBoard(int col, Player* currentPlayer){
             board[row][col] = currentPlayer->getPiece();
             return;
         }
-    }
+    }*/
+    col--;
+    vector<char>::iterator it = find(board[col].begin(), board[col].end(), '-');
+   
+    
+    *it = currentPlayer->getPiece();
     
     return;
 }

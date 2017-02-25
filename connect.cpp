@@ -92,10 +92,10 @@ void printHelpInfo(){
 }
 
 void original(){
-    string playerA_name;
-    string playerB_name;
-    int score;
-    
+    string playerA_name = "test";
+    string playerB_name = "test2";
+    int score = 1;
+    /*
     cout << "Original is a two player mode with two human players.\n\n";
     cout << "Player 1, please enter the name you'd like to use: ";
     getline(cin, playerA_name);
@@ -109,8 +109,8 @@ void original(){
     cin >> score;
     
     cout << "\nThank you for you patience and good luck to both of you! Enjoy!\n\n";
-    
-    Game game('x', playerA_name, "human", 'o', playerB_name, "human", 6, 7, score);
+    */
+    Game game('x', playerA_name, "human", 'o', playerB_name, "human", 7, 6, score);
     
     game.playGame();
     cout << "Thanks for playing!";
