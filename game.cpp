@@ -70,21 +70,21 @@ bool Game::checkDiag(char piece, int played_in){
     int difference = 0;
     int diff_forward = 0;
     
-    if ( (row - 4) < (played_in - 4)){
-        int rowStart = ((row - 4) > 0) ? (row - 4) : 0;
+    if ( (row - 3) < (played_in - 3)){
+        int rowStart = ((row - 3) > 0) ? (row - 3) : 0;
         difference = row - rowStart;
     } else {
-        int colStart = ((played_in - 4) > 0) ? (played_in - 4) : 0;
+        int colStart = ((played_in - 3) > 0) ? (played_in - 3) : 0;
         difference = played_in - colStart;
     }
     
     // check to make sure that the row and column are inbounds going forward.
     // using that number we can then
-    if ( (row + 4) > (played_in + 4)){
-        int rowEnd = ((row + 4) < int(board[0].size())) ? (row + 4) : int(board[0].size() - 1);
+    if ( (row + 3) > (played_in + 3)){
+        int rowEnd = ((row + 3) < int(board[0].size())) ? (row + 3) : int(board[0].size() - 1);
         diff_forward = rowEnd - row;
     } else {
-        int colEnd = ((played_in + 4) < int(board.size())) ? (played_in + 4) : int(board.size() - 1);
+        int colEnd = ((played_in + 3) < int(board.size())) ? (played_in + 3) : int(board.size() - 1);
         diff_forward = colEnd - played_in;
     }
     
@@ -110,28 +110,28 @@ bool Game::checkDiag(char piece, int played_in){
 
 /********************** BACKWARDS DIAGONAL SOLUTION CHECK **********************/
     // For conviencence:
-    int rowDiff = (row + 4) - int(board[0].size() - 1);
-    int colDiff = played_in - 4;
+    int rowDiff = int(board[0].size() - 1) - (row + 3);
+    int colDiff = played_in - 3;
     
     if ( rowDiff < colDiff){
-        int rowStart2 = ((row + 4) < int(board[0].size())) ? (row + 4) : int(board[0].size() - 1);
+        int rowStart2 = ((row + 3) < int(board[0].size())) ? (row + 3) : int(board[0].size() - 1);
         
         difference = rowStart2 - row;
     } else {
-        int colStart2 = ((played_in - 4) > 0) ? (played_in - 4) : 0;
+        int colStart2 = ((played_in - 3) > 0) ? (played_in - 3) : 0;
         difference = played_in - colStart2;
     }
     
     // check to make sure that the row and column are inbounds going forward.
     // using that number we can then
     
-    rowDiff = row - 4;
-    colDiff = (played_in + 4) - int(board.size() - 1);
+    rowDiff = row - 3;
+    colDiff =  int(board.size() - 1) - (played_in + 3);
     if ( rowDiff < colDiff){
-        int rowEnd2 = ((row - 4) > 0) ? (row - 4) : 0;
+        int rowEnd2 = ((row - 3) > 0) ? (row - 3) : 0;
         diff_forward = row - rowEnd2;
     } else {
-        int colEnd2 = ((played_in + 4) < int(board.size())) ? (played_in + 4) : int(board.size() - 1);
+        int colEnd2 = ((played_in + 3) < int(board.size())) ? (played_in + 3) : int(board.size() - 1);
         diff_forward = colEnd2 - played_in;
     }
     
@@ -167,8 +167,8 @@ bool Game::checkSide(char piece, int played_in){
     int row =  int(distance(board[played_in].begin(), it)) - 1;
     
     // start and end columns to look at.
-    int colStart = ((played_in - 4) > 0) ? (played_in - 4) : 0;
-    int colEnd = ((played_in + 4) < int(board.size()) - 1) ? (played_in + 4) : int(board.size() - 1);
+    int colStart = ((played_in - 3) > 0) ? (played_in - 3) : 0;
+    int colEnd = ((played_in + 3) < int(board.size()) - 1) ? (played_in + 3) : int(board.size() - 1);
     
     int counter = 0;
     
@@ -277,11 +277,11 @@ void Game::playGame(){
             
             try {
                 col = playerA->playPiece();
-                if ((col < 1) || col > int(board[0].size()))
+                if ((col < 1) || col > int(board.size()))
                     throw 'a';
             } catch (char) {
                 
-                while ((col < 1) || col > int(board[0].size())) {
+                while ((col < 1) || col > int(board.size())) {
                     cin.clear();
                     getline(cin, trash);
                     cout << playerA->getName() << " the move you selected is invalid.\n";
@@ -304,7 +304,7 @@ void Game::playGame(){
             printBoard();
             col = playerB->playPiece();
             
-            while ((col < 1) || col > int(board[0].size())) {
+            while ((col < 1) || col > int(board.size())) {
                 cin.clear();
                 getline(cin, trash);
                 cout << playerB->getName()<< " the move you selected is invalid.\n";
@@ -333,10 +333,10 @@ void Game::playGame(){
 int Game::checkFullColumn(int colSelected, Player* currentPlayer){
     
 
-        if (board[board.size() -1][colSelected - 1] != '-'){
+        if (board[colSelected - 1][board[colSelected - 1].size() - 1] != '-'){
             // the last piece in this column isn't the void piece so the column is full
             
-            while (board[board.size() -1][colSelected - 1] != '-'){
+            while (board[colSelected - 1][board[colSelected - 1].size() - 1] != '-'){
                 colSelected = currentPlayer->playFullColumn(colSelected);
             }
     
