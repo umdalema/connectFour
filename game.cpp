@@ -56,8 +56,10 @@ bool Game::checkBackDiag(char piece){
     return false; 
 }
 bool Game::checkDiag(char piece, int played_in){
+   
+/********************** FORWARD DIAGONAL SOLUTION CHECK ***********************/
     
-   // we can find the row we're playing in the easy way now:
+    // we can find the row we're playing in the easy way now:
     // we have the column that we played in, so we first need to get the row.
     vector<char>::iterator it = find(board[played_in].begin(), board[played_in].end(), '-');
     
@@ -103,21 +105,57 @@ bool Game::checkDiag(char piece, int played_in){
         
     }
     
-    return false;
 
+/********************** FORWARD DIAGONAL SOLUTION CHECK ***********************/
 
+/********************** BACKWARDS DIAGONAL SOLUTION CHECK **********************/
+    // For conviencence:
+    int rowDiff = (row + 4) - int(board[0].size() - 1);
+    int colDiff = played_in - 4;
     
-    for (size_t row = 0; row < (board.size() - 3); row++){
-        for (size_t col = 0; col < (board[row].size() - 3); col++){
-            if ((board[row][col] == piece) &&
-                (board[row + 1][col + 1] == piece) &&
-                (board[row + 2][col + 2] == piece) &&
-                (board[row + 3][col + 3] == piece)){
-                return true;
-            }
-        }
+    if ( rowDiff < colDiff){
+        int rowStart2 = ((row + 4) < int(board[0].size())) ? (row + 4) : int(board[0].size() - 1);
+        
+        difference = rowStart2 - row;
+    } else {
+        int colStart2 = ((played_in - 4) > 0) ? (played_in - 4) : 0;
+        difference = played_in - colStart2;
     }
+    
+    // check to make sure that the row and column are inbounds going forward.
+    // using that number we can then
+    
+    rowDiff = row - 4;
+    colDiff = (played_in + 4) - int(board.size() - 1);
+    if ( rowDiff < colDiff){
+        int rowEnd2 = ((row - 4) > 0) ? (row - 4) : 0;
+        diff_forward = row - rowEnd2;
+    } else {
+        int colEnd2 = ((played_in + 4) < int(board.size())) ? (played_in + 4) : int(board.size() - 1);
+        diff_forward = colEnd2 - played_in;
+    }
+    
+    counter = 0;
+    
+    for (int col = (played_in - difference); col <= played_in + diff_forward; col++){
+        
+        int rowCurrent =  row + difference;
+        
+        counter++;
+        difference--;
+        
+        if (board[col][rowCurrent] != piece){
+            counter = 0;
+        }
+        if (counter == 4){
+            return true;
+        }
+        
+    }
+    
     return false;
+
+
 }
 
 bool Game::checkSide(char piece, int played_in){
