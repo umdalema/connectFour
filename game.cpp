@@ -57,12 +57,55 @@ bool Game::checkBackDiag(char piece){
 }
 bool Game::checkDiag(char piece, int played_in){
     
-    // For now find the row that we're checking in the hard way:
+   // we can find the row we're playing in the easy way now:
+    // we have the column that we played in, so we first need to get the row.
+    vector<char>::iterator it = find(board[played_in].begin(), board[played_in].end(), '-');
     
-    for (size_t row = 0; row < board.size(); row++){
+    // get the correct row. Need to subtract one because of zero index.
+    int row =  int(distance(board[played_in].begin(), it)) - 1;
+    
+    // Check to make sure that the row and column are not out of bounds by going backwards:
+    int difference = 0;
+    int diff_forward = 0;
+    
+    if ( (row - 4) < (played_in - 4)){
+        int rowStart = ((row - 4) > 0) ? (row - 4) : 0;
+        difference = row - rowStart;
+    } else {
+        int colStart = ((played_in - 4) > 0) ? (played_in - 4) : 0;
+        difference = played_in - colStart;
+    }
+    
+    // check to make sure that the row and column are inbounds going forward.
+    // using that number we can then
+    if ( (row + 4) > (played_in + 4)){
+        int rowEnd = ((row + 4) < int(board[0].size())) ? (row + 4) : int(board[0].size() - 1);
+        diff_forward = rowEnd - row;
+    } else {
+        int colEnd = ((played_in + 4) < int(board.size())) ? (played_in + 4) : int(board.size() - 1);
+        diff_forward = colEnd - played_in;
+    }
+    
+    int counter = 0;
+    for (int col = (played_in - difference); col <= played_in + diff_forward; col++){
         
+        int rowCurrent =  row - difference;
+        
+        counter++;
+        difference--;
+        
+        if (board[col][rowCurrent] != piece){
+            counter = 0;
+        }
+        if (counter == 4){
+            return true;
+        }
         
     }
+    
+    return false;
+
+
     
     for (size_t row = 0; row < (board.size() - 3); row++){
         for (size_t col = 0; col < (board[row].size() - 3); col++){
